@@ -6,10 +6,11 @@ class BMIForm extends React.Component {
     super(props);
 
     this.state = { 
-      height: '',
+      feet: '',
+      inches: '',
       weight: '',
       age: '',
-      sex: '' 
+      sex: 'f' 
     };
   }
 
@@ -20,6 +21,8 @@ class BMIForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
+    let feetInches = `${this.state.feet}-${this.state.inches}`
+
     const options = {
       method: 'POST',
       url: 'https://bmi.p.rapidapi.com/',
@@ -29,15 +32,15 @@ class BMIForm extends React.Component {
         'x-rapidapi-host': 'bmi.p.rapidapi.com'
       },
       data: {
-        weight: {value: '146', unit: 'lb'},
-        height: {value: '5-10', unit: 'ft-in'},
-        sex: 'm',
-        age: '24'
+        weight: {value: this.state.weight, unit: 'lb'},
+        height: {value: feetInches, unit: 'ft-in'},
+        sex: this.state.sex,
+        age: this.state.age
       }
     };
     
     axios.request(options).then(function (response) {
-      console.log("response.data:", response.data);
+      console.log(response.data);
     }).catch(function (error) {
       console.error(error);
     });
@@ -46,13 +49,51 @@ class BMIForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} name="name" onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <>
+        <h1>
+          BMI Calculator
+        </h1>
+
+        <form onSubmit={this.handleSubmit}>
+
+          <label>
+            Weight (lb):
+            <input type="text" value={this.state.weight} name="weight" onChange={this.handleChange} />
+          </label>
+          <br />
+
+          <label>
+            Feet:
+            <input type="text" value={this.state.feet} name="feet" onChange={this.handleChange} />
+          </label>
+
+          &nbsp;
+
+          <label>
+            Inches:
+            <input type="text" value={this.state.inches} name="inches" onChange={this.handleChange} />
+          </label>
+          <br />
+
+          <label>
+            Age:
+            <input type="text" value={this.state.age} name="age" onChange={this.handleChange} />
+          </label>
+          <br />
+
+          <label>
+            Sex:
+            <select value={this.state.sex} name="sex" onChange={this.handleChange}>
+              <option value="f">Female</option>
+              <option value="m">Male</option>
+            </select>
+          </label>
+          <br />
+          <br />
+
+          <input type="submit" value="Calculate" />
+        </form>
+      </>
     );
   }
 }
