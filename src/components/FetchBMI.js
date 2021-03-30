@@ -18,11 +18,11 @@ class FetchBMI extends Component {
       url: 'https://bmi.p.rapidapi.com/',
       headers: {
         'content-type': 'application/json',
-        'x-rapidapi-key': '2233086461mshebbd5afefb4c79ap13b401jsndb3cf3fc7335',
+        'x-rapidapi-key': process.env.REACT_APP_API_KEY,
         'x-rapidapi-host': 'bmi.p.rapidapi.com'
       },
       data: {
-        weight: {value: '85.00', unit: 'kg'},
+        weight: {value: '90.00', unit: 'kg'},
         height: {value: '170.00', unit: 'cm'},
         sex: 'm',
         age: '24',
