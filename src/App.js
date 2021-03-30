@@ -1,17 +1,13 @@
 import React from "react";
 import './App.css';
-import FetchBMI from './components/FetchBMI'
+import BMIForm from './components/BMIForm'
 
 function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-
-      </header>
-
       <div>
-        <FetchBMI />
+        <BMIForm />
       </div>
     </div>
   );
