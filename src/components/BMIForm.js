@@ -107,7 +107,14 @@ class BMIForm extends React.Component {
           <input type="submit" value="Calculate" />
         </form>
 
-        {this.state.success ? <DisplayBMI test={"test"}/> : <></>}
+        {this.state.success ? 
+        <DisplayBMI 
+          bmi={this.state.returnedBMI} 
+          idealWeight={this.state.returnedIdealWeight}
+          risk={this.state.returnedRisk}
+          status={this.state.returnedStatus}
+        /> : 
+        <></>}
       </>
     );
   }

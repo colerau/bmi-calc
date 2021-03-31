@@ -2,11 +2,22 @@ import React from "react"
 
 const DisplayBMI = (props) => {
 
-  console.log(props, "inside displaybmi")
-
   return (
     <>
-      {console.log(props, "inside displaybmi")}
+      <br />
+      <br />
+      <h2>
+        BMI: {props.bmi}
+      </h2>
+      <h3>
+        <em>Status:</em> {props.status} 
+      </h3>
+      <h3>
+        <em>Risk:</em> {props.risk}
+      </h3>
+      <h3>
+        <em>Ideal Weight:</em> {props.idealWeight}
+      </h3>
     </>
   )
 }
