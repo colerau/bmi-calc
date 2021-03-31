@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import DisplayBMI from './DisplayBMI.js'
 
 class BMIForm extends React.Component {
   constructor(props) {
@@ -10,7 +11,12 @@ class BMIForm extends React.Component {
       inches: '',
       weight: '',
       age: '',
-      sex: 'f' 
+      sex: 'f',
+      success: false,
+      returnedBMI: '',
+      returnedStatus: '',
+      returnedRisk: '',
+      returnedIdealWeight: ''
     };
   }
 
@@ -23,6 +29,7 @@ class BMIForm extends React.Component {
 
     let feetInches = `${this.state.feet}-${this.state.inches}`
 
+    // options is an object that represents data from form
     const options = {
       method: 'POST',
       url: 'https://bmi.p.rapidapi.com/',
@@ -39,8 +46,14 @@ class BMIForm extends React.Component {
       }
     };
     
-    axios.request(options).then(function (response) {
-      console.log(response.data);
+    axios.request(options).then(response => {
+      this.setState({
+        returnedBMI: response.data.bmi.value,
+        returnedStatus: response.data.bmi.status,
+        returnedRisk: response.data.bmi.risk,
+        returnedIdealWeight: response.data.ideal_weight,
+        success: true
+      })
     }).catch(function (error) {
       console.error(error);
     });
@@ -93,6 +106,8 @@ class BMIForm extends React.Component {
 
           <input type="submit" value="Calculate" />
         </form>
+
+        {this.state.success ? <DisplayBMI test={"test"}/> : <></>}
       </>
     );
   }
