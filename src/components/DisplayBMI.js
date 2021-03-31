@@ -15,9 +15,9 @@ const DisplayBMI = (props) => {
       <h3>
         <em>Risk:</em> {props.risk}
       </h3>
-      <h3>
-        <em>Ideal Weight:</em> {props.idealWeight}
-      </h3>
+      {/* <h3>
+        <em>Ideal Weight For You:</em> {props.idealWeight}
+      </h3> */}
     </>
   )
 }
