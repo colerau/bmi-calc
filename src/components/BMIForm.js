@@ -16,7 +16,8 @@ class BMIForm extends React.Component {
       returnedBMI: '',
       returnedStatus: '',
       returnedRisk: '',
-      returnedIdealWeight: ''
+      returnedIdealWeight: '',
+      error: ''
     };
   }
 
@@ -55,7 +56,9 @@ class BMIForm extends React.Component {
         success: true
       })
     }).catch(function (error) {
-      console.error(error);
+      this.setState({
+        error: error
+      })
     });
 
   }
@@ -67,45 +70,51 @@ class BMIForm extends React.Component {
           BMI Calculator
         </h1>
 
-        <form onSubmit={this.handleSubmit}>
+        <div id="bmi-form">
 
-          <label>
-            Weight (lb):
-            <input type="text" value={this.state.weight} name="weight" onChange={this.handleChange} />
-          </label>
-          <br />
+          {this.state.error ? <h2>Sorry, there was an error</h2> : <></>}
 
-          <label>
-            Feet:
-            <input type="text" value={this.state.feet} name="feet" onChange={this.handleChange} />
-          </label>
+          <form onSubmit={this.handleSubmit}>
 
-          &nbsp;
+            <label>
+              Weight (lb):
+              <input type="text" value={this.state.weight} name="weight" onChange={this.handleChange} />
+            </label>
+            <br />
 
-          <label>
-            Inches:
-            <input type="text" value={this.state.inches} name="inches" onChange={this.handleChange} />
-          </label>
-          <br />
+            <label>
+              Feet:
+              <input type="text" value={this.state.feet} name="feet" onChange={this.handleChange} />
+            </label>
 
-          <label>
-            Age:
-            <input type="text" value={this.state.age} name="age" onChange={this.handleChange} />
-          </label>
-          <br />
+            &nbsp;
 
-          <label>
-            Sex:
-            <select value={this.state.sex} name="sex" onChange={this.handleChange}>
-              <option value="f">Female</option>
-              <option value="m">Male</option>
-            </select>
-          </label>
-          <br />
-          <br />
+            <label>
+              Inches:
+              <input type="text" value={this.state.inches} name="inches" onChange={this.handleChange} />
+            </label>
+            <br />
 
-          <input type="submit" value="Calculate" />
-        </form>
+            <label>
+              Age:
+              <input type="text" value={this.state.age} name="age" onChange={this.handleChange} />
+            </label>
+            <br />
+
+            <label>
+              Sex:
+              <select value={this.state.sex} name="sex" onChange={this.handleChange}>
+                <option value="f">Female</option>
+                <option value="m">Male</option>
+              </select>
+            </label>
+            <br />
+            <br />
+
+            <input type="submit" value="Calculate" />
+          </form>
+
+        </div>
 
         {this.state.success ? 
         <DisplayBMI 
